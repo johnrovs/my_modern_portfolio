@@ -1,8 +1,10 @@
+import { useState } from 'react'
 import { AnimatePresence, motion } from 'framer-motion'
 import { ChevronLeft, ChevronRight } from 'lucide-react'
 import SectionTitle from './SectionTitle'
 import CertificationCard from './CertificationCard'
 import CarouselDots from './CarouselDots'
+import CertificateModal from './CertificateModal'
 import { certifications } from '../data/certifications'
 import { useCarousel } from '../hooks/useCarousel'
 
@@ -28,6 +30,7 @@ function chunk(items, size) {
 }
 
 export default function Certifications() {
+  const [selected, setSelected] = useState(null)
   const slides = chunk(certifications, PER_SLIDE)
   const { index, direction, next, prev, goTo, pause, resume } = useCarousel(
     slides.length,
@@ -110,7 +113,12 @@ export default function Certifications() {
               >
                 <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
                   {activeSlide.map((cert, i) => (
-                    <CertificationCard key={cert.id} cert={cert} index={i} />
+                    <CertificationCard
+                      key={cert.id}
+                      cert={cert}
+                      index={i}
+                      onPreview={setSelected}
+                    />
                   ))}
                 </div>
               </motion.div>
@@ -150,6 +158,8 @@ export default function Certifications() {
           )}
         </div>
       </div>
+
+      <CertificateModal cert={selected} onClose={() => setSelected(null)} />
     </section>
   )
 }
