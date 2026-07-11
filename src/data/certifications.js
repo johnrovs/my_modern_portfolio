@@ -26,4 +26,5 @@ export const certifications = [
       'https://images.unsplash.com/photo-1555066931-4365d14bab8c?q=80&w=800&auto=format&fit=crop',
     credentialUrl: 'https://example.com/',
   },
+  
 ]
