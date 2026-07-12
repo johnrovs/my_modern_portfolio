@@ -1,15 +1,23 @@
 import { useState } from 'react'
 import { motion } from 'framer-motion'
-import { Mail, Phone, MapPin, Send, CheckCircle2, Loader2 } from 'lucide-react'
+import emailjs from '@emailjs/browser'
+import { Mail, Phone, MapPin, Send, CheckCircle2, Loader2, AlertCircle } from 'lucide-react'
 import SectionTitle from './SectionTitle'
 import SocialLinks from './SocialLinks'
 
 const initialForm = { name: '', email: '', subject: '', message: '' }
 
+// Set these in a .env.local file at the project root (see README → "Wiring up the
+// contact form" for the full walkthrough). Vite only exposes env vars prefixed
+// with VITE_ to the client.
+const SERVICE_ID = import.meta.env.VITE_EMAILJS_SERVICE_ID
+const TEMPLATE_ID = import.meta.env.VITE_EMAILJS_TEMPLATE_ID
+const PUBLIC_KEY = import.meta.env.VITE_EMAILJS_PUBLIC_KEY
+
 export default function Contact() {
   const [form, setForm] = useState(initialForm)
   const [errors, setErrors] = useState({})
-  const [status, setStatus] = useState('idle') // idle | loading | success
+  const [status, setStatus] = useState('idle') // idle | loading | success | error
 
   const validate = () => {
     const next = {}
@@ -34,12 +42,41 @@ export default function Contact() {
   const handleSubmit = async (e) => {
     e.preventDefault()
     if (!validate()) return
+
+    if (!SERVICE_ID || !TEMPLATE_ID || !PUBLIC_KEY) {
+      console.error(
+        'EmailJS is not configured. Add VITE_EMAILJS_SERVICE_ID, VITE_EMAILJS_TEMPLATE_ID, ' +
+          'and VITE_EMAILJS_PUBLIC_KEY to a .env.local file — see the README.'
+      )
+      setStatus('error')
+      setTimeout(() => setStatus('idle'), 5000)
+      return
+    }
+
     setStatus('loading')
-    // Simulated submit — wire this up to your email service (e.g. Formspree, EmailJS) or backend API.
-    await new Promise((res) => setTimeout(res, 1400))
-    setStatus('success')
-    setForm(initialForm)
-    setTimeout(() => setStatus('idle'), 4000)
+    try {
+      await emailjs.send(
+        SERVICE_ID,
+        TEMPLATE_ID,
+        {
+          from_name: form.name,
+          from_email: form.email,
+          subject: form.subject,
+          message: form.message,
+          // Matches the {{to_email}} placeholder used in the EmailJS template —
+          // keeps the recipient defined here rather than editable by the sender.
+          to_email: 'roverorommel12@gmail.com',
+        },
+        { publicKey: PUBLIC_KEY }
+      )
+      setStatus('success')
+      setForm(initialForm)
+      setTimeout(() => setStatus('idle'), 4000)
+    } catch (err) {
+      console.error('EmailJS send failed:', err)
+      setStatus('error')
+      setTimeout(() => setStatus('idle'), 5000)
+    }
   }
 
   return (
@@ -62,7 +99,7 @@ export default function Contact() {
                 <p className="text-sm text-white font-medium">roverorommel12@gmail.com</p>
               </div>
             </a>
-            <a href="tel:+639000000000" className="flex items-center gap-4 glass-card p-4 hover:border-accent/50 transition-colors">
+            <a href="tel:+17028575758" className="flex items-center gap-4 glass-card p-4 hover:border-accent/50 transition-colors">
               <span className="w-11 h-11 rounded-xl bg-secondary/15 flex items-center justify-center text-secondary">
                 <Phone size={18} />
               </span>
@@ -77,7 +114,7 @@ export default function Contact() {
               </span>
               <div>
                 <p className="text-xs text-textSecondary">Location</p>
-                <p className="text-sm text-white font-medium">Las Vegas, NV · Onsite - Hybrid - Remote-friendly</p>
+                <p className="text-sm text-white font-medium">Las Vegas, NV · Onsite · Hybrid · Remote-friendly</p>
               </div>
             </div>
           </div>
@@ -195,6 +232,17 @@ export default function Contact() {
               className="text-sm text-success text-center"
             >
               Thanks for reaching out — I'll reply within a day or two.
+            </motion.p>
+          )}
+
+          {status === 'error' && (
+            <motion.p
+              initial={{ opacity: 0, y: 6 }}
+              animate={{ opacity: 1, y: 0 }}
+              className="flex items-center justify-center gap-1.5 text-sm text-red-400 text-center"
+            >
+              <AlertCircle size={15} />
+              Something went wrong sending that — try again, or email me directly.
             </motion.p>
           )}
         </motion.form>
