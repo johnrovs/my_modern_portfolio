@@ -1,11 +1,11 @@
-import { motion } from 'framer-motion'
-import { Download } from 'lucide-react'
+import { motion } from "framer-motion";
+import { Download } from "lucide-react";
 
-export default function ResumeButton({ className = '' }) {
+export default function ResumeButton({ className = "" }) {
   return (
     <motion.a
-      href="/resume.pdf"
-      download="John-Rommel-Rovero-Resume.pdf"
+      href="/johnrovs.pdf"
+      download="johnrovs.pdf"
       whileHover={{ y: -3 }}
       whileTap={{ scale: 0.97 }}
       className={`btn-primary ${className}`}
@@ -13,5 +13,5 @@ export default function ResumeButton({ className = '' }) {
       <Download size={18} />
       Download Resume
     </motion.a>
-  )
+  );
 }
