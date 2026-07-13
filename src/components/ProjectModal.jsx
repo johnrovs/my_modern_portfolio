@@ -1,5 +1,5 @@
-import { AnimatePresence, motion } from 'framer-motion'
-import { X, Github, ExternalLink } from 'lucide-react'
+import { AnimatePresence, motion } from "framer-motion";
+import { X, Github, ExternalLink } from "lucide-react";
 
 export default function ProjectModal({ project, onClose }) {
   return (
@@ -19,7 +19,7 @@ export default function ProjectModal({ project, onClose }) {
             initial={{ opacity: 0, scale: 0.9, y: 20 }}
             animate={{ opacity: 1, scale: 1, y: 0 }}
             exit={{ opacity: 0, scale: 0.9, y: 20 }}
-            transition={{ duration: 0.25, ease: 'easeOut' }}
+            transition={{ duration: 0.25, ease: "easeOut" }}
             onClick={(e) => e.stopPropagation()}
             className="glass-card max-w-2xl w-full max-h-[85vh] overflow-y-auto"
           >
@@ -39,15 +39,22 @@ export default function ProjectModal({ project, onClose }) {
             </div>
 
             <div className="p-6 sm:p-8">
-              <h3 className="font-heading font-bold text-2xl text-white">{project.title}</h3>
-              <p className="mt-3 text-textSecondary leading-relaxed">{project.description}</p>
+              <h3 className="font-heading font-bold text-2xl text-white">
+                {project.title}
+              </h3>
+              <p className="mt-3 text-textSecondary leading-relaxed">
+                {project.description}
+              </p>
 
               <h4 className="mt-6 font-heading font-semibold text-white text-sm uppercase tracking-wide">
                 Key Features
               </h4>
               <ul className="mt-3 space-y-2">
                 {project.features.map((f) => (
-                  <li key={f} className="flex items-start gap-2 text-sm text-textSecondary">
+                  <li
+                    key={f}
+                    className="flex items-start gap-2 text-sm text-textSecondary"
+                  >
                     <span className="mt-1.5 w-1.5 h-1.5 rounded-full bg-accent shrink-0" />
                     {f}
                   </li>
@@ -66,11 +73,21 @@ export default function ProjectModal({ project, onClose }) {
               </div>
 
               <div className="mt-8 flex flex-wrap gap-3">
-                <a href={project.github} target="_blank" rel="noopener noreferrer" className="btn-secondary text-sm">
+                {/* <a
+                  href={project.github}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="btn-secondary text-sm"
+                >
                   <Github size={16} /> View Code
-                </a>
-                <a href={project.demo} target="_blank" rel="noopener noreferrer" className="btn-primary text-sm">
-                  <ExternalLink size={16} /> Live Demo
+                </a> */}
+                <a
+                  href={project.demo}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="btn-primary text-sm"
+                >
+                  <ExternalLink size={16} /> View Project
                 </a>
               </div>
             </div>
@@ -78,5 +95,5 @@ export default function ProjectModal({ project, onClose }) {
         </motion.div>
       )}
     </AnimatePresence>
-  )
+  );
 }

@@ -56,7 +56,7 @@ export default function ProjectCard({ project, index, onDetails }) {
         </div>
 
         <div className="mt-6 flex flex-wrap gap-3">
-          <motion.a
+          {/* <motion.a
             whileHover={{ y: -2 }}
             whileTap={{ scale: 0.96 }}
             href={project.github}
@@ -75,7 +75,7 @@ export default function ProjectCard({ project, index, onDetails }) {
             className="btn-primary !py-2 !px-4 text-sm"
           >
             <ExternalLink size={16} /> Live Demo
-          </motion.a>
+          </motion.a> */}
           <motion.button
             whileHover={{ y: -2 }}
             whileTap={{ scale: 0.96 }}
