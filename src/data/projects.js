@@ -73,7 +73,7 @@ export const projects = [
   },
   {
     id: "rdbl",
-    title: "RDBL(Receipt,Disbursement,Banking, and Logs)",
+    title: "RDBL",
     description:
       "A web-based financial management system that centralizes receipts, disbursements, banking transactions, and operational logs. Built with Java MVC architecture, it delivers real-time financial tracking, comprehensive reporting, and executive dashboards** for smarter business decisions.",
     image: "/projects/1.png",
