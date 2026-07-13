@@ -1,8 +1,10 @@
 import { motion } from "framer-motion";
-import { Github, ExternalLink, ArrowUpRight } from "lucide-react";
+import { Github, ExternalLink, ArrowUpRight, FileText } from "lucide-react";
+import { isFilled } from "../utils/isFilled";
 
 export default function ProjectCard({ project, index, onDetails }) {
   const reversed = index % 2 === 1;
+  const hasDocs = isFilled(project.documentation);
 
   return (
     <motion.div
@@ -84,6 +86,19 @@ export default function ProjectCard({ project, index, onDetails }) {
           >
             Project Details <ArrowUpRight size={16} />
           </motion.button>
+
+          {/* {hasDocs && (
+            <motion.a
+              whileHover={{ y: -2 }}
+              whileTap={{ scale: 0.96 }}
+              href={project.documentation}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex items-center gap-1 px-4 py-2 text-sm font-medium text-textSecondary hover:text-white transition-colors"
+            >
+              <FileText size={15} /> View Documentation
+            </motion.a>
+          )} */}
         </div>
       </div>
     </motion.div>

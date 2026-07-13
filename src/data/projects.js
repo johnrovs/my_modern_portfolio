@@ -22,6 +22,9 @@ export const projects = [
     ],
     github: " ",
     demo: "https://track.wwwexpress.com.ph/WExTrackAndTrace/",
+    // Add a link to a README, PDF, Google Doc, Notion page, etc. Leave blank
+    // (or a single space) to hide the "View Documentation" button entirely.
+    documentation: "/documents/WExTrack-Documentation.pdf",
   },
   {
     id: "oneiisyshub-feati",
@@ -46,6 +49,7 @@ export const projects = [
     ],
     github: "",
     demo: "https://myfeatilinks.feati.ph:8080/OneiiSysHubFeati/",
+    documentation: "/documents/oneiiSysHubFEATI-Documentation.pdf",
   },
   {
     id: "oneiisyshub-wex",
@@ -70,6 +74,7 @@ export const projects = [
     ],
     github: " ",
     demo: " ",
+    documentation: "/documents/oneiiSysHubWEx-Documentation.pdf",
   },
   {
     id: "rdbl",
@@ -95,5 +100,6 @@ export const projects = [
     ],
     github: " ",
     demo: " ",
+    documentation: "/documents/RDBL-Documentation.pdf",
   },
 ];

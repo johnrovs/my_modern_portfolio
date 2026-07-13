@@ -1,7 +1,11 @@
 import { AnimatePresence, motion } from "framer-motion";
-import { X, Github, ExternalLink } from "lucide-react";
+import { X, Github, ExternalLink, FileText } from "lucide-react";
+import { isFilled } from "../utils/isFilled";
 
 export default function ProjectModal({ project, onClose }) {
+  const hasDemo = project ? isFilled(project.demo) : false;
+  const hasDocs = project ? isFilled(project.documentation) : false;
+
   return (
     <AnimatePresence>
       {project && (
@@ -74,21 +78,33 @@ export default function ProjectModal({ project, onClose }) {
 
               <div className="mt-8 flex flex-wrap gap-3">
                 {/* <a
-                  href={project.github}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="btn-secondary text-sm"
-                >
-                  <Github size={16} /> View Code
-                </a> */}
-                <a
-                  href={project.demo}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="btn-primary text-sm"
-                >
-                  <ExternalLink size={16} /> View Project
-                </a>
+                               href={project.github}
+                               target="_blank"
+                               rel="noopener noreferrer"
+                               className="btn-secondary text-sm"
+                             >
+                               <Github size={16} /> View Code
+                             </a> */}
+                {hasDemo && (
+                  <a
+                    href={project.demo}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="btn-primary text-sm"
+                  >
+                    <ExternalLink size={16} /> View Project
+                  </a>
+                )}
+                {hasDocs && (
+                  <a
+                    href={project.documentation}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="btn-secondary text-sm"
+                  >
+                    <FileText size={16} /> View Documentation
+                  </a>
+                )}
               </div>
             </div>
           </motion.div>
