@@ -1,18 +1,20 @@
-import { motion } from 'framer-motion'
-import { Github, ExternalLink, ArrowUpRight } from 'lucide-react'
+import { motion } from "framer-motion";
+import { Github, ExternalLink, ArrowUpRight } from "lucide-react";
 
 export default function ProjectCard({ project, index, onDetails }) {
-  const reversed = index % 2 === 1
+  const reversed = index % 2 === 1;
 
   return (
     <motion.div
       initial={{ opacity: 0, y: 40 }}
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true, amount: 0.2 }}
-      transition={{ duration: 0.6, ease: 'easeOut' }}
+      transition={{ duration: 0.6, ease: "easeOut" }}
       className="gradient-border glass-card overflow-hidden grid md:grid-cols-2"
     >
-      <div className={`relative overflow-hidden aspect-video md:aspect-auto ${reversed ? 'md:order-2' : ''}`}>
+      <div
+        className={`relative overflow-hidden aspect-video md:aspect-auto ${reversed ? "md:order-2" : ""}`}
+      >
         <img
           src={project.image}
           alt={`${project.title} screenshot`}
@@ -32,7 +34,10 @@ export default function ProjectCard({ project, index, onDetails }) {
 
         <ul className="mt-4 space-y-2">
           {project.features.slice(0, 3).map((f) => (
-            <li key={f} className="flex items-start gap-2 text-sm text-textSecondary">
+            <li
+              key={f}
+              className="flex items-start gap-2 text-sm text-textSecondary"
+            >
               <span className="mt-1.5 w-1.5 h-1.5 rounded-full bg-accent shrink-0" />
               {f}
             </li>
@@ -82,5 +87,5 @@ export default function ProjectCard({ project, index, onDetails }) {
         </div>
       </div>
     </motion.div>
-  )
+  );
 }

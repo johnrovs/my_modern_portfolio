@@ -1,9 +1,9 @@
-import { useState } from 'react'
-import { motion, AnimatePresence } from 'framer-motion'
+import { useState } from "react";
+import { motion, AnimatePresence } from "framer-motion";
 
 export default function SkillCard({ skill, index }) {
-  const [hovered, setHovered] = useState(false)
-  const Icon = skill.icon
+  const [hovered, setHovered] = useState(false);
+  const Icon = skill.icon;
 
   return (
     <motion.div
@@ -16,7 +16,7 @@ export default function SkillCard({ skill, index }) {
       whileHover={{ y: -6 }}
       className="relative glass-card p-4 flex flex-col items-center gap-3 cursor-default"
     >
-      <AnimatePresence>
+      {/* <AnimatePresence>
         {hovered && (
           <motion.div
             initial={{ opacity: 0, y: 6, scale: 0.9 }}
@@ -28,19 +28,21 @@ export default function SkillCard({ skill, index }) {
             {skill.level}% proficient
           </motion.div>
         )}
-      </AnimatePresence>
+      </AnimatePresence> */}
 
       <motion.div
         animate={hovered ? { scale: 1.15, rotate: 6 } : { scale: 1, rotate: 0 }}
-        transition={{ type: 'spring', stiffness: 300, damping: 15 }}
+        transition={{ type: "spring", stiffness: 300, damping: 15 }}
         className="w-11 h-11 flex items-center justify-center rounded-xl bg-white/5"
       >
         <Icon size={24} style={{ color: skill.color }} />
       </motion.div>
 
-      <p className="text-sm font-medium text-textPrimary text-center">{skill.name}</p>
+      <p className="text-sm font-medium text-textPrimary text-center">
+        {skill.name}
+      </p>
 
-      <div className="w-full h-1.5 rounded-full bg-white/10 overflow-hidden">
+      {/* <div className="w-full h-1.5 rounded-full bg-white/10 overflow-hidden">
         <motion.div
           initial={{ width: 0 }}
           whileInView={{ width: `${skill.level}%` }}
@@ -48,7 +50,7 @@ export default function SkillCard({ skill, index }) {
           transition={{ duration: 1, delay: index * 0.05 + 0.2, ease: 'easeOut' }}
           className="h-full rounded-full bg-gradient-to-r from-primary to-accent"
         />
-      </div>
+      </div> */}
     </motion.div>
-  )
+  );
 }
