@@ -16,6 +16,7 @@ import {
   SiPostman,
   SiApachemaven,
   SiIntellijidea,
+  SiApache,
 } from "react-icons/si";
 import { DiJava } from "react-icons/di";
 import { VscVscode } from "react-icons/vsc";
@@ -73,6 +74,7 @@ export const skillCategories = [
         level: 82,
         color: "#6db33f",
       },
+      { name: "SVN", icon: SiApache, level: 85, color: "#ff6c37" },
       { name: "VS Code", icon: VscVscode, level: 70, color: "#007acc" },
       {
         name: "IntelliJ IDEA",
